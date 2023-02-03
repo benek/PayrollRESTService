@@ -54,7 +54,7 @@ public class OrderController {
                 .body(assembler.toModel(order));
     }
 
-    @DeleteMapping("/orders/{id}")
+    @DeleteMapping("/orders/{id}/cancel")
     public ResponseEntity<?> cancel(@PathVariable Long id) {
         Order order = repository.findById(id)
                 .orElseThrow(() -> new OrderNotFoundException(id));
@@ -72,7 +72,7 @@ public class OrderController {
                         .withDetail("You can't cancel an order that is in the " + order.getStatus() + " status."));
     }
 
-    @PutMapping("/orders/{id}")
+    @PutMapping("/orders/{id}/complete")
     public ResponseEntity<?> complete(@PathVariable Long id) {
         Order order = repository.findById(id)
                 .orElseThrow(() -> new OrderNotFoundException(id));
