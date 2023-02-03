@@ -2,9 +2,8 @@ package payroll;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +37,16 @@ public class OrderController {
                 .orElseThrow(() -> new OrderNotFoundException(id));
 
         return assembler.toModel(order);
+    }
+
+    @PostMapping("/orders")
+    public ResponseEntity<EntityModel<Order>> newOrder(@RequestBody Order order) {
+        order.setStatus(Status.IN_PROGRESS);
+        Order newOrder = repository.save(order);
+
+        return ResponseEntity
+                .created(linkTo(methodOn(OrderController.class).one(newOrder.getId())).toUri())
+                .body(assembler.toModel(order));
     }
 
 }
