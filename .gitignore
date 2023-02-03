@@ -1,0 +1,32 @@
+##############################
+## Java
+##############################
+*.class
+*.jar
+
+##############################
+## IntelliJ
+##############################
+out/
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+##############################
+## OS X
+##############################
+.DS_Store
+
+##############################
+## Gradle
+##############################
+bin/
+build/
+.gradle
+.gradletasknamecache
+gradle-app.setting
+!gradle-wrapper.jar
